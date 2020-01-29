@@ -1,26 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Input from './Component/Input/Input';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    name: '',
+    list: [
+      { id: 1, name: 'Parth' },
+      { id: 2, name: 'Vishal' },
+      { id: 3, name: 'Jaj' },
+    ],
+    currentId: null
+  }
+
+  changeHandler = (event) => {
+    this.setState({ name: event.target.value });
+  }
+
+  buttonClickHandler = (data) => {
+    let updatedList = [...this.state.list];
+    const { list, currentId } = this.state;
+
+    if (this.state.currentId == null) {
+      this.setState({
+        name: '',
+        list: [...list, { id: updatedList.length + 1, name: data }],
+        currentId: null
+      });
+    } else {
+      list.forEach(element => {
+        if (element.id === currentId) {
+          return element.name = data;
+        }
+      });
+      this.setState({ list: list, name: '', currentId: null });
+    }
+  }
+
+  deleteClickHandler = (id) => {
+    let updatedList = [...this.state.list];
+    updatedList.forEach((element, index) => {
+      if (element.id === id) {
+        updatedList.splice(index, 1);
+      }
+    });
+    this.setState({ list: updatedList });
+  }
+
+  updateClickHandler = (id, name) => {
+    this.setState({ name: name, currentId: id });
+  }
+
+
+  render() {
+    return (
+      <div className="container mt-5">
+        <Input
+          userName={this.state.name}
+          listData={this.state.list}
+          change={this.changeHandler}
+          buttonClick={this.buttonClickHandler}
+          deleteClick={this.deleteClickHandler}
+          updateClick={this.updateClickHandler}
+          currentID={this.state.currentId}
+        ></Input>
+      </div>
+    );
+  }
 }
 
 export default App;
