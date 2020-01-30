@@ -5,6 +5,8 @@ class Form extends Component {
   state = {
     email: 'email',
     password: 'password',
+    emailValid: false,
+    passwordValid: false,
     isValid: false
   }
 
@@ -13,7 +15,9 @@ class Form extends Component {
   }
 
   formValidation = () => {
-    this.setState({ isValid: true });
+    if (this.state.passwordValid && this.state.emailValid) {
+      this.setState({ isValid: true });
+    }
   }
 
   submitHandler = (event) => {
@@ -32,10 +36,12 @@ class Form extends Component {
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input type="text" className="form-control" name="email" onChange={this.inputChangeHandler} value={this.state.email} />
+          <small id="emailHelp" className="form-text text-danger">{this.state.email ? '' : 'Please enter valid Email id.'}</small>
         </div >
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input type="password" className="form-control" name="password" onChange={this.inputChangeHandler} value={this.state.password} />
+          <small id="emailHelp" className="form-text text-danger">{this.state.password ? this.state.password.length > 5 ? '' : 'Password should be more then 5 letter.' : 'Please enter valid password.'}</small>
         </div >
         <button className="btn btn-primary btn-block" type="submit">Submit</button>
       </form >
