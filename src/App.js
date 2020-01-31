@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Switch, Route, Link } from "react-router-dom";
 import Home from './Component/Home/Home';
 import About from './Component/About/About';
 import Input from './Component/Input/Input';
@@ -36,7 +36,7 @@ class App extends Component {
               <hr />
 
               <Switch>
-                <Route exact path="/"><Home /></Route>
+                <Route exact path="/"><Redirect to='/home'/></Route>
                 <Route path="/home"><Home /></Route>
                 <Route path="/about"><About /></Route>
                 <Route path="/input"><Input /></Route>
