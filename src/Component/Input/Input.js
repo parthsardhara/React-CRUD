@@ -56,7 +56,7 @@ class Input extends Component {
       <div>
         <div className="row mb-3">
           <div className="col-8">
-            <input className="form-control" type="text" value={this.state.name} onChange={this.changeHandler} />
+            <input className="form-control" type="text" value={this.state.name} onChange={this.changeHandler} placeholder="Enter name" />
           </div>
           <div className="col-4">
             <button className="btn btn-primary" onClick={() => this.buttonClickHandler(this.state.name)}>{this.state.buttonName}</button>
@@ -69,8 +69,8 @@ class Input extends Component {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
               </tr>
             </thead>
             <tbody>
